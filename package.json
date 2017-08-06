@@ -1,0 +1,40 @@
+{
+  "name": "login-server",
+  "version": "1.0.0",
+  "description": "Login server - simple Express server to help with user authentication",
+  "main": "index.js",
+  "babel": {
+    "ignore": [
+      "dist/"
+    ],
+    "presets": ["babel-preset-es2015"]
+  },
+  "scripts": {
+    "test": "test",
+    "start": "babel src --out-dir lib && node lib/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cpwilkerson/login-server.git"
+  },
+  "keywords": [
+    "login",
+    "jwt",
+    "react",
+    "express",
+    "node"
+  ],
+  "author": "Christian Wilkerson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cpwilkerson/login-server/issues"
+  },
+  "homepage": "https://github.com/cpwilkerson/login-server#readme",
+  "dependencies": {
+    "babel-polyfill": "^6.23.0",
+    "express": "^4.15.3"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1"
+  }
+}
