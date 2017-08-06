@@ -4,7 +4,13 @@ import ReactDOM from 'react-dom'
 class App extends React.Component {
   render () {
     return (
-      <div>React App in the house!</div>
+      <div className="container-fluid">
+        <div className="row">
+          <div className="jumbotron text-center">
+            <h1>Login Screen</h1>
+          </div>
+        </div>
+      </div>
     )
   }
 }
