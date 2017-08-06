@@ -14,7 +14,7 @@
   },
   "scripts": {
     "test": "test",
-    "start": "webpack && babel src --out-dir lib && node lib/index.js"
+    "start": "cp index.html public/index.html && webpack && babel src --out-dir lib && node lib/index.js"
   },
   "repository": {
     "type": "git",
