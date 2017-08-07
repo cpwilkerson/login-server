@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-class App extends React.Component {
+class App extends React.Component { // eslint-disable-line no-unused-vars
   render () {
     return (
       <div className="container-fluid">
