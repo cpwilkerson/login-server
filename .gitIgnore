@@ -2,3 +2,5 @@ lib/
 node_modules/
 *.log
 public/
+coverage/
+.nyc_output
