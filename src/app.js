@@ -8,8 +8,10 @@ class App extends React.Component { // eslint-disable-line no-unused-vars
         <div className="row">
           <div className="jumbotron text-center">
             <h1>Login Screen</h1>
-            <h3>TODO: Add login screen components here</h3>
           </div>
+        </div>
+        <div className="row">
+          <h3 className="text-center">TODO: Add login screen components here</h3>
         </div>
       </div>
     )
