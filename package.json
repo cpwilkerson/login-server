@@ -13,7 +13,8 @@
     ]
   },
   "scripts": {
-    "test": "nyc mocha --compilers js:babel-core/register test",
+    "test": "nyc mocha --harmony --compilers js:babel-core/register test/**/*.test.js",
+    "babel:transpile": "babel src --out-dir lib",
     "start": "cp index.html public/index.html && webpack && babel src --out-dir lib && node lib/index.js"
   },
   "repository": {
@@ -61,10 +62,22 @@
     "babel-preset-latest": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-3": "^6.24.1",
+    "chai": "^4.1.1",
+    "chai-as-promised": "^7.1.1",
+    "enzyme": "^2.9.1",
     "eslint": "^4.4.0",
     "eslint-plugin-react": "^7.1.0",
+    "ignore-styles": "^5.0.1",
+    "jsdom": "^11.1.0",
+    "jsdom-global": "^3.0.2",
+    "lolex": "^1.6.0",
     "mocha": "^3.5.0",
     "nyc": "^11.1.0",
+    "react-test-renderer": "^15.6.1",
+    "sinon": "^3.2.0",
+    "sinon-as-promised": "^4.0.3",
+    "sinon-chai": "^2.12.0",
+    "supertest": "^3.0.0",
     "webpack": "^3.4.1"
   }
 }

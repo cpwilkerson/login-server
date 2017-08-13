@@ -210,7 +210,7 @@
         "prefer-rest-params": "error",
         "prefer-spread": "error",
         "prefer-template": "error",
-        "quote-props": "error",
+        "quote-props": "off",
         "quotes": [
             "error",
             "single"
@@ -220,7 +220,7 @@
         "rest-spread-spacing": "error",
         "semi": "off",
         "semi-spacing": "error",
-        "sort-imports": "error",
+        "sort-imports": "off",
         "sort-keys": "error",
         "sort-vars": "error",
         "space-before-blocks": "error",

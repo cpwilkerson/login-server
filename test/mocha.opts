@@ -1,0 +1,2 @@
+--require test/config/env
+--require test/config/node
