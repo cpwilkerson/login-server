@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import LoginView from './login-view'
 
 class App extends React.Component { // eslint-disable-line no-unused-vars
   render () {
@@ -11,7 +12,7 @@ class App extends React.Component { // eslint-disable-line no-unused-vars
           </div>
         </div>
         <div className="row">
-          <h3 className="text-center">TODO: Add login screen components here</h3>
+          <LoginView />
         </div>
       </div>
     )
