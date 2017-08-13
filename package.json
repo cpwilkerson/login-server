@@ -22,7 +22,7 @@
   "scripts": {
     "test": "nyc mocha --harmony --compilers js:babel-core/register test/**/*.test.js",
     "babel:transpile": "babel src --out-dir lib",
-    "start": "cp index.html public/index.html && webpack && babel src --out-dir lib && node lib/index.js"
+    "start": "cp index.html public/index.html && babel src --out-dir lib && webpack && node lib/index.js"
   },
   "repository": {
     "type": "git",
