@@ -11,7 +11,7 @@ class App extends React.Component { // eslint-disable-line no-unused-vars
             <h1>Login Screen</h1>
           </div>
         </div>
-        <div className="row">
+        <div className="row center-block">
           <LoginView />
         </div>
       </div>
