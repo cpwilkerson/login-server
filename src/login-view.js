@@ -26,8 +26,12 @@ const LoginView = () => {
           </div>
           <div className="col-sm-10 col-lg-8 panel-body center-block">
             <div className="btn-toolbar">
-              <button type="submit" className="btn btn-primary center">Submit</button>
-              <button type="cancel" className="btn btn-default center">Cancel</button>
+              <button type="submit" className="btn btn-primary center">
+                Submit
+              </button>
+              <button type="cancel" className="btn btn-default center">
+                Cancel
+              </button>
             </div>
           </div>
         </div>

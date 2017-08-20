@@ -16,7 +16,7 @@ describe('login-view testing', () => {
   })
 
   it('should render login-view', () => {
-    const count = loginView.find('.form-check').length
+    const count = loginView.find('.btn-toolbar').length
 
     expect(count).to.equal(1)
   })
