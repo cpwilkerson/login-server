@@ -1,8 +1,24 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import LoginView from './login-view'
+import login from './login-reducers'
+import {postLogin} from './login-actions'
+import {createStore} from 'redux'
+import {Provider} from 'react-redux'
+
+const store = createStore(login)
 
 class App extends React.Component { // eslint-disable-line no-unused-vars
+  constructor (props) {
+    super(props)
+    this.handlePostLogin = this.handlePostLogin.bind(this)
+  }
+
+  handlePostLogin (event) {
+    event.preventDefault()
+    store.dispatch(postLogin())
+  }
+
   render () {
     return (
       <div className="container-fluid">
@@ -12,7 +28,7 @@ class App extends React.Component { // eslint-disable-line no-unused-vars
           </div>
         </div>
         <div className="row center-block">
-          <LoginView />
+          <LoginView postLogin={this.handlePostLogin}/>
         </div>
       </div>
     )
@@ -20,6 +36,8 @@ class App extends React.Component { // eslint-disable-line no-unused-vars
 }
 
 ReactDOM.render(
-  <App></App>,
+  <Provider store={store}>
+    <App />
+  </Provider>,
   document.getElementById('react-app')
 )

@@ -1,4 +1,5 @@
 export const POST_LOGIN = 'POST_LOGIN'
+export const INITIALIZE = 'INITIALIZE'
 
 
 /**
@@ -11,4 +12,12 @@ export function postLogin (data) {
     type: POST_LOGIN,
     data
   }
+}
+
+/**
+ * Action creator for initializing the store.
+ * @returns {object} INITIALIZE object
+ */
+export function initialize () {
+  return {type: INITIALIZE}
 }

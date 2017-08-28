@@ -1,9 +1,17 @@
-import React from 'react'
+import {default as React} from 'react'
+import PropTypes from 'prop-types'
+import {connect} from 'react-redux'
 
-const LoginView = () => {
+const LoginView = (props) => {
+  var loginStatus = 'Submit'
+
+  if (props.isLoggingIn) {
+    loginStatus = 'Logging in...'
+  }
+
   return (
     <div className="center-block">
-      <form>
+      <form id="login-view" onSubmit={props.postLogin}>
         <div className="col-lg-2 col-md-1 col-sm-1" />
         <div className="col-sm-10 col-lg-8 panel panel-default center-block">
           <div className="form-group panel-body center-block">
@@ -14,7 +22,7 @@ const LoginView = () => {
                   aria-describedby="emailHelp"
                   placeholder="Enter email" ></input>
             <small id="emailHelp" className="form-text text-muted">
-              We'll never share your email with anyone else.
+              We&apos;ll never share your email with anyone else.
             </small>
           </div>
           <div className="form-group panel-body center-block">
@@ -26,8 +34,9 @@ const LoginView = () => {
           </div>
           <div className="col-sm-10 col-lg-8 panel-body center-block">
             <div className="btn-toolbar">
-              <button type="submit" className="btn btn-primary center">
-                Submit
+              <button type="submit" id="submit"
+                      className="btn btn-primary center">
+                {loginStatus}
               </button>
               <button type="cancel" className="btn btn-default center">
                 Cancel
@@ -40,4 +49,21 @@ const LoginView = () => {
   )
 }
 
-export default LoginView
+LoginView.propTypes = {
+  isLoggingIn: PropTypes.bool.isRequired,
+  postLogin: PropTypes.func.isRequired
+}
+
+/**
+ * mapStateToProps is used by the redux store to update the UI
+ * 
+ * @param {any} state component state
+ * @returns {object} prop to state mapping
+ */
+function mapStateToProps (state) {
+  return {isLoggingIn: state.isLoggingIn}
+}
+
+export {LoginView, mapStateToProps}
+
+export default connect(mapStateToProps)(LoginView)
