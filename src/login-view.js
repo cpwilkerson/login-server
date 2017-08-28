@@ -38,7 +38,9 @@ const LoginView = (props) => {
                       className="btn btn-primary center">
                 {loginStatus}
               </button>
-              <button type="cancel" className="btn btn-default center">
+              <button id="cancel"
+                      className="btn btn-default center"
+                      onClick={props.cancelLogin}>
                 Cancel
               </button>
             </div>
@@ -51,7 +53,8 @@ const LoginView = (props) => {
 
 LoginView.propTypes = {
   isLoggingIn: PropTypes.bool.isRequired,
-  postLogin: PropTypes.func.isRequired
+  postLogin: PropTypes.func.isRequired,
+  cancelLogin: PropTypes.func.isRequired
 }
 
 /**

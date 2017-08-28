@@ -1,4 +1,4 @@
-import React from 'react' //eslint-disable-line
+import React from 'react'
 import {default as LoginView} from '../src/login-view'
 import login from '../src/login-reducers'
 import {postLogin, initialize} from '../src/login-actions'
@@ -18,6 +18,14 @@ function handlePostLogin () {
   store.dispatch(postLogin())
 }
 
+/**
+ * Utility to fire off initialize function
+ * @return {any} nothing
+ */
+function handleCancelLogin () {
+  store.dispatch(initialize())
+}
+
 describe('login-view testing', () => {
   var loginView //eslint-disable-line
 
@@ -26,7 +34,8 @@ describe('login-view testing', () => {
     before(() => {
       loginView = mount(
         <Provider store={store}>
-          <LoginView postLogin={handlePostLogin}/>
+          <LoginView postLogin={handlePostLogin}
+                     cancelLogin={handleCancelLogin}/>
         </Provider>
       )
     })
@@ -36,7 +45,7 @@ describe('login-view testing', () => {
       loginView.unmount()
     })
 
-    it('should render login-view', () => {
+    it('should login-view submit', () => {
       const submitBtn = loginView.find('#submit')
 
       loginView.find('#login-view').simulate('submit')
@@ -45,13 +54,24 @@ describe('login-view testing', () => {
       expect(count).to.equal(1)
       expect(loginView.find('#submit').text()).to.equal('Logging in...')
     })
+
+    it('should login-view submit', () => {
+      const cancelBtn = loginView.find('#cancel')
+
+      loginView.find('#cancel').simulate('click')
+      const count = cancelBtn.length
+
+      expect(count).to.equal(1)
+      expect(loginView.find('#submit').text()).to.equal('Submit')
+    })
   })
 
   describe('isLoggingIn is false', () => {
     before(() => {
       loginView = mount(
         <Provider store={store}>
-          <LoginView postLogin={handlePostLogin}/>
+          <LoginView postLogin={handlePostLogin}
+                     cancelLogin={handleCancelLogin}/>
         </Provider>
       )
     })
