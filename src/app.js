@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import LoginView from './login-view'
 import login from './login-reducers'
-import {postLogin, initialize} from './login-actions'
+import {initLogin, initialize} from './login-actions'
 import {createStore} from 'redux'
 import {Provider} from 'react-redux'
 
@@ -11,13 +11,13 @@ const store = createStore(login)
 class App extends React.Component { // eslint-disable-line no-unused-vars
   constructor (props) {
     super(props)
-    this.handlePostLogin = this.handlePostLogin.bind(this)
+    this.handleInitLogin = this.handleInitLogin.bind(this)
     this.handleCancelLogin = this.handleCancelLogin.bind(this)
   }
 
-  handlePostLogin (event) {
+  handleInitLogin (event) {
     event.preventDefault()
-    store.dispatch(postLogin())
+    store.dispatch(initLogin())
   }
 
   handleCancelLogin (event) {
@@ -34,7 +34,7 @@ class App extends React.Component { // eslint-disable-line no-unused-vars
           </div>
         </div>
         <div className="row center-block">
-          <LoginView postLogin={this.handlePostLogin}
+          <LoginView initLogin={this.handleInitLogin}
                      cancelLogin={this.handleCancelLogin}/>
         </div>
       </div>

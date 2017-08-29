@@ -11,7 +11,7 @@ const LoginView = (props) => {
 
   return (
     <div className="center-block">
-      <form id="login-view" onSubmit={props.postLogin}>
+      <form id="login-view" onSubmit={props.initLogin}>
         <div className="col-lg-2 col-md-1 col-sm-1" />
         <div className="col-sm-10 col-lg-8 panel panel-default center-block">
           <div className="form-group panel-body center-block">
@@ -53,7 +53,7 @@ const LoginView = (props) => {
 
 LoginView.propTypes = {
   isLoggingIn: PropTypes.bool.isRequired,
-  postLogin: PropTypes.func.isRequired,
+  initLogin: PropTypes.func.isRequired,
   cancelLogin: PropTypes.func.isRequired
 }
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import {default as LoginView} from '../src/login-view'
 import login from '../src/login-reducers'
-import {postLogin, initialize} from '../src/login-actions'
+import {initLogin, initialize} from '../src/login-actions'
 import {createStore} from 'redux'
 import {Provider} from 'react-redux'
 
@@ -14,8 +14,8 @@ const store = createStore(login)
  * Utility to fire off postLogin function
  * @return {any} nothing
  */
-function handlePostLogin () {
-  store.dispatch(postLogin())
+function handleInitLogin () {
+  store.dispatch(initLogin())
 }
 
 /**
@@ -34,7 +34,7 @@ describe('login-view testing', () => {
     before(() => {
       loginView = mount(
         <Provider store={store}>
-          <LoginView postLogin={handlePostLogin}
+          <LoginView initLogin={handleInitLogin}
                      cancelLogin={handleCancelLogin}/>
         </Provider>
       )
@@ -70,7 +70,7 @@ describe('login-view testing', () => {
     before(() => {
       loginView = mount(
         <Provider store={store}>
-          <LoginView postLogin={handlePostLogin}
+          <LoginView initLogin={handleInitLogin}
                      cancelLogin={handleCancelLogin}/>
         </Provider>
       )

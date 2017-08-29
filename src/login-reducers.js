@@ -1,4 +1,4 @@
-import {POST_LOGIN, INITIALIZE} from './login-actions'
+import {INIT_LOGIN, INITIALIZE} from './login-actions'
 
 const initialState = {isLoggingIn: false}
 
@@ -11,7 +11,7 @@ const initialState = {isLoggingIn: false}
 function login (state = initialState, action) {
   if (action) {
     switch (action.type) {
-      case POST_LOGIN:
+      case INIT_LOGIN:
         return Object.assign({}, {isLoggingIn: true})
       case INITIALIZE:
         return Object.assign({}, initialState)

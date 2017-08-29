@@ -1,15 +1,15 @@
-export const POST_LOGIN = 'POST_LOGIN'
+export const INIT_LOGIN = 'INIT_LOGIN'
 export const INITIALIZE = 'INITIALIZE'
 
 
 /**
  * Action creator for posting a login request.
  * @param {object} data Login data
- * @returns {object} POST_LOGIN object
+ * @returns {object} INIT_LOGIN object
  */
-export function postLogin (data) {
+export function initLogin (data) {
   return {
-    type: POST_LOGIN,
+    type: INIT_LOGIN,
     data
   }
 }
