@@ -2,11 +2,12 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import LoginView from './login-view'
 import login from './login-reducers'
-import {initLogin, initialize} from './login-actions'
-import {createStore} from 'redux'
+import {initialize, postLogin} from './login-actions'
+import {createStore, applyMiddleware} from 'redux'
+import thunk from 'redux-thunk'
 import {Provider} from 'react-redux'
 
-const store = createStore(login)
+const store = createStore(login, applyMiddleware(thunk))
 
 class App extends React.Component { // eslint-disable-line no-unused-vars
   constructor (props) {
@@ -17,7 +18,7 @@ class App extends React.Component { // eslint-disable-line no-unused-vars
 
   handleInitLogin (event) {
     event.preventDefault()
-    store.dispatch(initLogin())
+    store.dispatch(postLogin(store.dispatch))
   }
 
   handleCancelLogin (event) {

@@ -21,3 +21,21 @@ export function initLogin (data) {
 export function initialize () {
   return {type: INITIALIZE}
 }
+
+/**
+ * Action creator to POST a login to server
+ * 
+ * @param {any} dispatch redux dispatch function
+ * @returns {function} function to be returned later
+ */
+export function postLogin (dispatch) {
+  // Send immediate feedback to the user
+  dispatch(initLogin())
+
+  // Post the login
+  return () => {
+    setTimeout(() => {
+      dispatch(initialize())
+    }, 5000)
+  }
+}

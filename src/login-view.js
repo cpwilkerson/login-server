@@ -1,6 +1,7 @@
 import {default as React} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import {initialize, initLogin} from './login-actions'
 
 const LoginView = (props) => {
   var loginStatus = 'Submit'
@@ -67,6 +68,20 @@ function mapStateToProps (state) {
   return {isLoggingIn: state.isLoggingIn}
 }
 
-export {LoginView, mapStateToProps}
+/**
+ * mapDispatchToProps is used by the redux store to map dispatch action creators
+ * to the props within this component
+ * 
+ * @param {any} dispatch component state
+ * @returns {object} prop to state mapping
+ */
+function mapDispatchToProps (dispatch) {
+  return {
+    initLogin: () => dispatch(initLogin()),
+    cancelLogin: () => dispatch(initialize())
+  }
+}
 
-export default connect(mapStateToProps)(LoginView)
+export {LoginView, mapStateToProps, mapDispatchToProps}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginView)

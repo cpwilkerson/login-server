@@ -1,21 +1,22 @@
 import React from 'react'
 import {default as LoginView} from '../src/login-view'
 import login from '../src/login-reducers'
-import {initLogin, initialize} from '../src/login-actions'
-import {createStore} from 'redux'
+import {postLogin, initialize} from '../src/login-actions'
+import {createStore, applyMiddleware} from 'redux'
+import thunk from 'redux-thunk'
 import {Provider} from 'react-redux'
 
 import {mount} from 'enzyme'
 
 const expect = global.expect
-const store = createStore(login)
+const store = createStore(login, applyMiddleware(thunk))
 
 /**
  * Utility to fire off postLogin function
  * @return {any} nothing
  */
 function handleInitLogin () {
-  store.dispatch(initLogin())
+  store.dispatch(postLogin())
 }
 
 /**
