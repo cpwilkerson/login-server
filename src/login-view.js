@@ -1,60 +1,78 @@
 import {default as React} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {initialize, initLogin} from './login-actions'
+import {initialize, postLogin} from './login-actions'
 
-const LoginView = (props) => {
-  var loginStatus = 'Submit'
-
-  if (props.isLoggingIn) {
-    loginStatus = 'Logging in...'
+class LoginView extends React.Component { // eslint-disable-line no-unused-vars
+  constructor (props) {
+    super(props)
+    this.handleInitLogin = this.handleInitLogin.bind(this)
+    this.handleCancelLogin = this.handleCancelLogin.bind(this)
   }
 
-  return (
-    <div className="center-block">
-      <form id="login-view" onSubmit={props.initLogin}>
-        <div className="col-lg-2 col-md-1 col-sm-1" />
-        <div className="col-sm-10 col-lg-8 panel panel-default center-block">
-          <div className="form-group panel-body center-block">
-            <label htmlFor="exampleInputEmail1">Email address</label>
-            <input type="email"
-                  className="form-control"
-                  id="exampleInputEmail1"
-                  aria-describedby="emailHelp"
-                  placeholder="Enter email" ></input>
-            <small id="emailHelp" className="form-text text-muted">
-              We&apos;ll never share your email with anyone else.
-            </small>
-          </div>
-          <div className="form-group panel-body center-block">
-            <label htmlFor="exampleInputPassword1">Password</label>
-            <input type="password"
-                  className="form-control"
-                  id="exampleInputPassword1"
-                  placeholder="Password"/>
-          </div>
-          <div className="col-sm-10 col-lg-8 panel-body center-block">
-            <div className="btn-toolbar">
-              <button type="submit" id="submit"
-                      className="btn btn-primary center">
-                {loginStatus}
-              </button>
-              <button id="cancel"
-                      className="btn btn-default center"
-                      onClick={props.cancelLogin}>
-                Cancel
-              </button>
+  handleInitLogin (event) {
+    event.preventDefault()
+    this.props.postLogin()
+  }
+
+  handleCancelLogin (event) {
+    event.preventDefault()
+    this.props.cancelLogin()
+  }
+
+  render () {
+    var loginStatus = 'Submit'
+
+    if (this.props.isLoggingIn) {
+      loginStatus = 'Logging in...'
+    }
+
+    return (
+      <div className="center-block">
+        <form id="login-view" onSubmit={this.handleInitLogin}>
+          <div className="col-lg-2 col-md-1 col-sm-1" />
+          <div className="col-sm-10 col-lg-8 panel panel-default center-block">
+            <div className="form-group panel-body center-block">
+              <label htmlFor="exampleInputEmail1">Email address</label>
+              <input type="email"
+                    className="form-control"
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    placeholder="Enter email" ></input>
+              <small id="emailHelp" className="form-text text-muted">
+                We&apos;ll never share your email with anyone else.
+              </small>
+            </div>
+            <div className="form-group panel-body center-block">
+              <label htmlFor="exampleInputPassword1">Password</label>
+              <input type="password"
+                    className="form-control"
+                    id="exampleInputPassword1"
+                    placeholder="Password"/>
+            </div>
+            <div className="col-sm-10 col-lg-8 panel-body center-block">
+              <div className="btn-toolbar">
+                <button type="submit" id="submit"
+                        className="btn btn-primary center">
+                  {loginStatus}
+                </button>
+                <button id="cancel"
+                        className="btn btn-default center"
+                        onClick={this.handleCancelLogin}>
+                  Cancel
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      </form>
-    </div>
-  )
+        </form>
+      </div>
+    )
+  }
 }
 
 LoginView.propTypes = {
   isLoggingIn: PropTypes.bool.isRequired,
-  initLogin: PropTypes.func.isRequired,
+  postLogin: PropTypes.func.isRequired,
   cancelLogin: PropTypes.func.isRequired
 }
 
@@ -77,7 +95,7 @@ function mapStateToProps (state) {
  */
 function mapDispatchToProps (dispatch) {
   return {
-    initLogin: () => dispatch(initLogin()),
+    postLogin: () => dispatch(postLogin(dispatch)),
     cancelLogin: () => dispatch(initialize())
   }
 }

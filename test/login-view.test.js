@@ -35,8 +35,7 @@ describe('login-view testing', () => {
     before(() => {
       loginView = mount(
         <Provider store={store}>
-          <LoginView initLogin={handleInitLogin}
-                     cancelLogin={handleCancelLogin}/>
+          <LoginView />
         </Provider>
       )
     })
@@ -46,17 +45,7 @@ describe('login-view testing', () => {
       loginView.unmount()
     })
 
-    it('should login-view submit', () => {
-      const submitBtn = loginView.find('#submit')
-
-      loginView.find('#login-view').simulate('submit')
-      const count = submitBtn.length
-
-      expect(count).to.equal(1)
-      expect(loginView.find('#submit').text()).to.equal('Logging in...')
-    })
-
-    it('should login-view submit', () => {
+    it('should login-view cancel', () => {
       const cancelBtn = loginView.find('#cancel')
 
       loginView.find('#cancel').simulate('click')
@@ -65,6 +54,23 @@ describe('login-view testing', () => {
       expect(count).to.equal(1)
       expect(loginView.find('#submit').text()).to.equal('Submit')
     })
+
+    it('should login-view submit', (done) => {
+      const submitBtn = loginView.find('#submit')
+
+      loginView.find('#login-view').simulate('submit')
+      const count = submitBtn.length
+
+      expect(count).to.equal(1)
+      setTimeout(() => {
+        expect(loginView.find('#submit').text()).to.equal('Logging in...')
+      }, 100)
+
+      setTimeout(() => {
+        expect(loginView.find('#submit').text()).to.equal('Submit')
+        done()
+      }, 5250)
+    }).timeout(6000)
   })
 
   describe('isLoggingIn is false', () => {
