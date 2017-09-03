@@ -6,18 +6,36 @@ import {initialize, postLogin} from './login-actions'
 class LoginView extends React.Component { // eslint-disable-line no-unused-vars
   constructor (props) {
     super(props)
+    this.state = {
+      userName: '',
+      password: ''
+    }
+
     this.handleInitLogin = this.handleInitLogin.bind(this)
     this.handleCancelLogin = this.handleCancelLogin.bind(this)
+    this.handleUserNameChange = this.handleUserNameChange.bind(this)
+    this.handlePasswordChange = this.handlePasswordChange.bind(this)
   }
 
   handleInitLogin (event) {
     event.preventDefault()
-    this.props.postLogin()
+    this.props.postLogin({
+      user: this.state.userName,
+      password: this.state.password
+    })
   }
 
   handleCancelLogin (event) {
     event.preventDefault()
     this.props.cancelLogin()
+  }
+
+  handleUserNameChange (event) {
+    this.setState({userName: event.target.value})
+  }
+
+  handlePasswordChange (event) {
+    this.setState({password: event.target.value})
   }
 
   render () {
@@ -33,22 +51,22 @@ class LoginView extends React.Component { // eslint-disable-line no-unused-vars
           <div className="col-lg-2 col-md-1 col-sm-1" />
           <div className="col-sm-10 col-lg-8 panel panel-default center-block">
             <div className="form-group panel-body center-block">
-              <label htmlFor="exampleInputEmail1">Email address</label>
-              <input type="email"
+              <label htmlFor="userName">User Name</label>
+              <input type="username"
                     className="form-control"
-                    id="exampleInputEmail1"
-                    aria-describedby="emailHelp"
-                    placeholder="Enter email" ></input>
-              <small id="emailHelp" className="form-text text-muted">
-                We&apos;ll never share your email with anyone else.
-              </small>
+                    id="userName"
+                    placeholder="Enter user name"
+                    value={this.state.userName}
+                    onChange={this.handleUserNameChange} />
             </div>
             <div className="form-group panel-body center-block">
               <label htmlFor="exampleInputPassword1">Password</label>
               <input type="password"
                     className="form-control"
                     id="exampleInputPassword1"
-                    placeholder="Password"/>
+                    placeholder="Password"
+                    value={this.state.password}
+                    onChange={this.handlePasswordChange} />
             </div>
             <div className="col-sm-10 col-lg-8 panel-body center-block">
               <div className="btn-toolbar">
@@ -95,7 +113,7 @@ function mapStateToProps (state) {
  */
 function mapDispatchToProps (dispatch) {
   return {
-    postLogin: () => dispatch(postLogin(dispatch)),
+    postLogin: (data) => dispatch(postLogin(data, dispatch)),
     cancelLogin: () => dispatch(initialize())
   }
 }

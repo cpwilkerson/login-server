@@ -7,13 +7,13 @@ require('ignore-styles')
 var jsdom = require('jsdom');
 const {JSDOM} = jsdom;
 
-const { document } = (new JSDOM('')).window;
+const {document} = (new JSDOM('')).window;
 
 global.document = document;
 
-const exposedProperties = ['window', 'navigator', 'document'] //eslint-disable-line
+const exposedProperties = ['window', 'navigator', 'document', 'sessionStorage'] //eslint-disable-line
 
-// global.document = jsdom('', {url: 'http://localhost'})
+// global.document = jsdom('', {url: 'http://localhost#hash', 'html': ''})
 global.window = document.defaultView
 Object.keys(document.defaultView).forEach((property) => {
   if (typeof global[property] === 'undefined') {
