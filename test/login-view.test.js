@@ -159,28 +159,6 @@ describe('login-view testing', () => {
       loginView.unmount()
     })
 
-    beforeEach(() => {
-      // sinon.stub(global, 'fetch').callsFake((apiCall, params) => {
-      //   console.log('sinon stub 2', {apiCall: apiCall, params: params})
-      //   const parsedParams = JSON.parse(params.body)
-      //   const res = {json: () => parsedParams}
-
-      //   if (parsedParams.password === 'password') {
-      //     res.status = 200
-      //     res.json({
-      //       'token': jwt.sign({item1: 'here is item 1'}, 'MyJWTSecret', {expiresIn: 120}),
-      //       'url': '/success'
-      //     })
-
-      //     return Promise.resolve(Object.assign({}, res))
-      //   }
-      // })
-    })
-
-    afterEach(() => {
-      // global.fetch.restore()
-    })
-
     it('should render login-view', () => {
       const submitBtn = loginView.find('#submit')
       const count = submitBtn.length

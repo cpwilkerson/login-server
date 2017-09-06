@@ -39,12 +39,12 @@ export function loginResult (dispatch, data) {
     // console.log('redirect to...', data)
     // console.log('window.location', window.location)
     window.location.href = data.url
-    window.sessionStorage.setItem('login-server-token',
+    window.localStorage.setItem('login-server-token',
                                   data.token)
   }
 }
 
-const LOGIN_URI = 'http://localhost:3000/login'
+const LOGIN_URI = 'http://localhost/login-attempt'
 
 /**
  * Action creator to POST a login to server
@@ -81,5 +81,5 @@ export function postLogin (data, dispatch) {
     then((json) => {
       dispatch(loginResult(dispatch, json))
     })
-}
+  }
 }
