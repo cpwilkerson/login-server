@@ -12,6 +12,8 @@ app.use((req, res, next) => {
 
 app.use(bodyParser.json())
 
+const LOGIN_URI = 'http://192.168.1.13'
+
 app.post('/login-attempt', (req, res) => {
   console.log('login params', req.body)
   if (req.body.password === 'password') {
@@ -20,7 +22,7 @@ app.post('/login-attempt', (req, res) => {
               'token': jwt.sign({userName: req.body.user},
                        'MyJWTSecret',
                        {expiresIn: 60}),
-              'url': 'http://localhost'
+              'url': LOGIN_URI
              })
   } else {
     res.status = 401
@@ -28,7 +30,7 @@ app.post('/login-attempt', (req, res) => {
       'token': jwt.sign({item1: 'unauthorized'},
                'MyJWTSecret',
                {expiresIn: 0}),
-      'url': 'http://localhost/login'
+      'url': `${LOGIN_URI}/login`
      })
   }
 })

@@ -34,7 +34,7 @@ app.post('/authorize', (req, res, next) => {
     res.json({
       'authorized': false,
       'token': '',
-      'url': 'http://localhost/login',
+      'url': 'http://192.168.1.13/login',
       error
     })
   }

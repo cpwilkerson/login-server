@@ -36,6 +36,21 @@
   ],
   "author": "Christian Wilkerson",
   "license": "ISC",
+  "nyc": {
+    "lines": 100,
+    "statements": 100,
+    "functions": 100,
+    "branches": 100,
+    "include": [
+      "src/**"
+    ],
+    "reporter": [
+      "lcov",
+      "text-summary"
+    ],
+    "sourceMap": false,
+    "instrument": false
+  },
   "dependencies": {
     "body-parser": "^1.17.2",
     "express": "^4.15.4",

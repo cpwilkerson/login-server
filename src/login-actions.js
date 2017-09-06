@@ -36,15 +36,13 @@ export function loginResult (dispatch, data) {
   dispatch(initialize())
 
   return () => {
-    // console.log('redirect to...', data)
-    // console.log('window.location', window.location)
     window.location.href = data.url
     window.localStorage.setItem('login-server-token',
                                   data.token)
   }
 }
 
-const LOGIN_URI = 'http://localhost/login-attempt'
+const LOGIN_URI = '/login-attempt'
 
 /**
  * Action creator to POST a login to server

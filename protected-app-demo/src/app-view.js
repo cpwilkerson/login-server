@@ -29,13 +29,8 @@ class AppView extends React.Component { // eslint-disable-line no-unused-vars
         <div id="app-view">
           <div className="col-lg-2 col-md-1 col-sm-1" />
           <div className="col-sm-10 col-lg-8 panel panel-default center-block">
-            <div className="form-group panel-body center-block">
-              Content - {authorizedStatus}
-            </div>
-            <div className="col-sm-10 col-lg-8 panel-body center-block">
-              <div className="btn-toolbar">
-                Toolbar
-              </div>
+            <div className="alert alert-info">
+              <h4>{authorizedStatus}</h4>
             </div>
           </div>
         </div>

@@ -21,7 +21,6 @@ export function gettingContent () {
  * @returns {object} action object
  */
 export function getAuthorized (dispatch, data) {
-  console.log('getAuthorized', data)
   if (data.authorized) {
     return {
       type: AUTHORIZED,
@@ -31,14 +30,14 @@ export function getAuthorized (dispatch, data) {
   }
 
   return () => {
-    console.log('redirect to...', data)
-    // console.log('window.location', window.location)
+    // console.log('redirect to...', data)
     window.location.href = data.url
     window.sessionStorage.setItem('login-server-token', '')
   }
 }
 
-const APP_URI = 'http://localhost'
+// const APP_URI = 'http://localhost'
+const APP_URI = ''
 
 /**
  * Action creator for requesting content from the server.
@@ -47,12 +46,10 @@ const APP_URI = 'http://localhost'
  * @returns {object} INIT_LOGIN object
  */
 export function getContent (data, dispatch) {
-  console.log('get content')
   dispatch(gettingContent())
 
   // Post the login
   return () => {
-    console.log('fetching authorize...token', window.localStorage.getItem('login-server-token'))
     fetch(`${APP_URI}/authorize`, {
       method: 'POST',
       body: JSON.stringify({
@@ -73,7 +70,6 @@ export function getContent (data, dispatch) {
       }
     ).
     then((json) => {
-      console.log('fetched authorize', json)
       dispatch(getAuthorized(dispatch, json))
     })
   }
