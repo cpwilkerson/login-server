@@ -309,7 +309,6 @@ Assuming your docker and nginx configurations go off without a hitch
 
 * Where to go from here?
   * User Registration server
-  * Updated to use process.env instead of hard-coded IP addresses
   * Maybe a timer component in the web-app to periodically check for authorization
 
 ---
