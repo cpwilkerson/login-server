@@ -7,3 +7,6 @@ coverage/
 
 # Finder 
 .DS_Store
+
+# Config file
+.env

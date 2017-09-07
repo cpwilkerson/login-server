@@ -1,18 +1,23 @@
+/* eslint-disable no-console */
+/* eslint-disable no-process-env */
+
 require('babel-polyfill')
+require('dotenv').config()
 import express from 'express'
 import bodyParser from 'body-parser'
 import jwt from 'jsonwebtoken'
 
+
 var app = express()
 
 app.use((req, res, next) => {
-  console.log('LOG', req.path) // eslint-disable-line
+  // console.log('LOG', req.path)
   next()
 })
 
 app.use(bodyParser.json())
 
-const LOGIN_URI = 'http://192.168.1.13'
+const LOGIN_URI = process.env.APP_URI
 
 app.post('/login-attempt', (req, res) => {
   console.log('login params', req.body)
@@ -41,5 +46,8 @@ app.get('/success', (req, res) => {
 
 app.use('/login', express.static('public'))
 
-console.log('Listening on port 3000') // eslint-disable-line
+console.log('Login-Server listening on port 3000')
 app.listen(3000)
+
+/* eslint-enable no-console */
+/* eslint-enable no-process-env */

@@ -36,8 +36,7 @@ export function getAuthorized (dispatch, data) {
   }
 }
 
-// const APP_URI = 'http://localhost'
-const APP_URI = ''
+// const APP_URI = process.env.APP_URI
 
 /**
  * Action creator for requesting content from the server.
@@ -50,7 +49,7 @@ export function getContent (data, dispatch) {
 
   // Post the login
   return () => {
-    fetch(`${APP_URI}/authorize`, {
+    fetch('/authorize', {
       method: 'POST',
       body: JSON.stringify({
         token: window.localStorage.getItem('login-server-token')

@@ -2,11 +2,12 @@
 import React from 'react'
 import {default as AppView} from '../src/app-view'
 import appReducer from '../src/app-reducers'
-import {getAuthorized, getContent, gettingContent, initialize} from '../src/app-actions'
+import {initialize} from '../src/app-actions'
 import {createStore, applyMiddleware} from 'redux'
 import thunk from 'redux-thunk'
 import {Provider} from 'react-redux'
-import fetch from 'isomorphic-fetch'
+// import fetch from 'isomorphic-fetch'
+require('isomorphic-fetch')
 import jwt from 'jsonwebtoken'
 
 import {mount} from 'enzyme'
@@ -16,7 +17,7 @@ const sinon = global.sinon
 const store = createStore(appReducer, applyMiddleware(thunk))
 
 // expires 2027-09-05
-const jwtRecord = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IkdhbmRhbGYiLCJpYXQiOjE1MDQ2NjIxMDAsImV4cCI6MTUwNDY2MjE2MH0.vl2Fv74qPuXdSN0ay5k-mWiOsrckfwejEBTsdyG8mc0'
+// const jwtRecord = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IkdhbmRhbGYiLCJpYXQiOjE1MDQ2NjIxMDAsImV4cCI6MTUwNDY2MjE2MH0.vl2Fv74qPuXdSN0ay5k-mWiOsrckfwejEBTsdyG8mc0'
 
 
 describe('app-view testing', () => {
