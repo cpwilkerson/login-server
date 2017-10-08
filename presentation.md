@@ -1,8 +1,10 @@
 # React w/ JSON Web Tokens
 by Christian Wilkerson
+cpwilkerson72@gmail.com
 
 on Github @ [cpwilkerson.github.io](http://cpwilkerson.github.io)
 on Twitter @ cpwilkerson72
+
 
 This presentation can be found on my github page under **login-server** project.
 
@@ -14,6 +16,8 @@ This presentation can be found on my github page under **login-server** project.
 * How to read them in a react component
 * How to use them in a micro-service architecture
 
+^ Just read the list.  We're telling them what we're going to tell them
+
 ---
 
 ### JSON Web Tokens
@@ -23,19 +27,15 @@ This presentation can be found on my github page under **login-server** project.
   - Allows for a more pure REST api
   - Server no longer stores secret session data, the client does
 
----
-
-### JSON Web Tokens
-
-* tl;dr 
-  - JWTs are a way of storing encrypted data in a client for use by a server
-  - Generally, JWTs are created, written, and read by servers, but are stored on clients
+^ Authentication is the name of the game here
+  Pure REST api can be achieved
+  Session data can be offloaded to the client instead of residing the server
 
 ---
 
 ### JSON Web Tokens
 
-* We use JWTs to store user/session data in order to allow for securely logging in to a web application
+* JWTs are mainly used for **Authentication** and secure data transfer
 * A complete description of JWTs can be found at [jwt.io](http://jwt.io)
 
 ---
@@ -52,6 +52,25 @@ const jwtRecord = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IkdhbmRh
 ![inline, right](JSON-Web-Token.png)
 
 Example of a JWT that expires in 10 years
+
+^ JWT Format dot separated
+  * Header
+      - Base64 encoded JSON Object
+      - contains algorithm used
+      - token type - typically 'JWT'
+
+^  * Payload
+    * Contains claims
+      - Reserved Claims
+      - Public Claims
+      - Private Claims
+    * The payload contains the data we actually care about. Like user name, and how long their authentication is good for.
+
+^  * Signature
+    * Combines the first two parts, a passphrase, and is encoded based on the encryption algorithm
+    - Our example is HS256
+    - HS256 Recommends a passphrase 32 characters or longer
+
 
 ---
 
@@ -71,6 +90,12 @@ Debugger
 The secret is the key to making JWTs work.  The secret is a string passphrase that is used to encode and decode the JWT into usable data.
 
 **NOTE:** **NEVER** put the secret in your client code.
+
+^ Mentioned a couple of times now, but the secret is what makes this work
+  HS256 can be bruteforced if the secret is less than 256bits or 32 characters.
+
+^ JWTs can support many algorithms.  Check out jwt.io for a current list
+  
 
 ---
 
@@ -94,6 +119,8 @@ import jwt from 'jsonwebtoken'
   } else {
     ...
 ```
+
+^ The important line here is the jwt.sign call
 
 ---
 
@@ -124,13 +151,16 @@ import jwt from 'jsonwebtoken'
     res.json({
       'authorized': false,
       'token': '',
-      'url': 'http://192.168.1.13/login',
+      'url': `${process.env.APP_URI}/login`,
       error
     })
 
   ...
 
 ```
+
+^ The important line here is the jwt.verify call
+  FYI...There is also a version that uses a callback
 
 ---
 ## JWTs in React
@@ -145,6 +175,11 @@ import jwt from 'jsonwebtoken'
 
 * React App **only** supplies the JWT to the server
   * Generally kept in local or session storage
+
+^ If the React app deciphers the JWT, that means your secret passphrase is on 
+  the client side.  That's a no no.
+
+^ Our example keeps the jwt in local storage...persists across multiple tabs
 
 ---
 
@@ -165,6 +200,9 @@ Getting the JWT...
     })
 ```
 
+^ look at the window.localStorage.getItem
+  we are reading the token
+
 ---
 ## JWTs in React
 
@@ -182,6 +220,8 @@ export function loginResult (dispatch, data) {
 }
 ```
 
+^ Here we are writing the token to localStorage
+
 ---
 ## JWTs in React
 
@@ -189,7 +229,8 @@ First we see our login screen
 
 ![inline](login-screen.png)
 
-Yes, the CSS is Bootstrap
+^ When we run the login-server, this is what we'll see
+  The CSS is Bootstrap - chosen for its mobile friendliness
 
 ---
 ## JWTs in React
@@ -198,7 +239,8 @@ Assuming we have provided the correct password
 
 ![inline](web-app.png)
 
-Also, with Bootstrap
+^ Our protected application!
+  Also, with Bootstrap
 
 ---
 ## JWTs in React
@@ -207,7 +249,13 @@ Now would be a good time to actually look at some code
 * App one is a login server
 * App two is our protected web app
 * Both are constructed using both React and Redux
+
+^ Let's take a walk through the code...at least the good parts
+  In this example, the web-app JWT reading/writing takes place in localStorage
+  inside of a Redux store
   * Anyone familiar with Redux?
+  * Don't forget, this is all online so you can puzzle over it for as long as
+    you like later
 
 ---
 ## Microservice Architecture
@@ -222,6 +270,11 @@ What is a Microservice Architecture?
   * database-server
   * user registration server
 
+^ Session and Local storage demand that the data comes from a single URI
+  * Running on one computer means that each of my servers will be on different ports
+  * This breaks the single URI
+  * Next slide will explain what to do
+
 ---
 ## Microservice Archetecture
 
@@ -232,6 +285,9 @@ How do you get all those services behaving like one website?
   * [nginx @ docker store](https://store.docker.com/images/nginx)
 * More information on nginx can be found @ [nginx](https://www.nginx.com)
 * More information can be found on Docker @ [Docker](http://www.docker.com)
+
+^ nginx to the rescue!
+  * explain how you have nginx setup and working in a docker container
 
 ---
 ## Microservice Architecture
@@ -259,6 +315,8 @@ server {
     }
 }
 ```
+
+^ Don't forget to update your local config with your current IP address
 
 ---
 ## Microservice Architecture
@@ -310,6 +368,7 @@ Assuming your docker and nginx configurations go off without a hitch
 * Where to go from here?
   * User Registration server
   * Maybe a timer component in the web-app to periodically check for authorization
+  * Put funny memes in the slides 
 
 ---
 ## Thank You
